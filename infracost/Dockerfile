@@ -5,7 +5,10 @@ FROM alpine:3.14
 RUN apk add --no-cache terraform git curl --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
 
 # Install Infracost using the official method
-RUN curl -fsSL https://raw.githubusercontent.com/infracost/infracost/master/scripts/install.sh | sh
+RUN curl -fsSL https://raw.githubusercontent.com/infracost/infracost/master/scripts/install.sh | sh -s -- -b /usr/local/bin v0.10.29
+
+# Downloads the CLI based on your OS/arch and puts it in /usr/local/bin
+
 
 # Install curl github-cli
 RUN apk add git curl github-cli
