@@ -45,5 +45,5 @@ terraform show -json tfplan.binary > plan.json
 
 infracost breakdown --path plan.json
   # infracost breakdown --path . --terraform-workspace $DEPLOYMENT_ENV --format json >infracost.json
-  infracost comment github --path lan.json --repo $GITHUB_REPOSITORY --pull-request $PR_NUMBER --github-token $GITHUB_TOKEN --behavior new
+  infracost comment github --path plan.json --repo $GITHUB_REPOSITORY --pull-request $PR_NUMBER --github-token $GITHUB_TOKEN --behavior new
 done
