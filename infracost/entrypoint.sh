@@ -44,7 +44,7 @@ for x in $DIRECTORIES; do
  infracost comment github --path=infracost.json \
     --repo=$GITHUB_REPOSITORY \
     --pull-request=$PR_NUMBER `# or --commit=$GITHUB_SHA` \
-    --github-token=$GITUB_TOKEN \
+    --github-token=${{ secrets.GITHUB_TOKEN }} \
     --behavior=new
 #  infracost comment github --path infracost.json  --repo $GITHUB_REPOSITORY --pull-request $PR_NUMBER --github-token $GITHUB_TOKEN --behavior new
 done
