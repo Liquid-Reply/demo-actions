@@ -40,15 +40,6 @@ for x in $DIRECTORIES; do
     gh pr comment $PR_NUMBER -b "$PR_COMMENT"
   fi
   set -e
-terraform plan -out tfplan.binary
-terraform show -json tfplan.binary > plan.json
-
-infracost breakdown --path plan.json --format json
-  # infracost breakdown --path . --terraform-workspace $DEPLOYMENT_ENV --format json >infracost.json
-# infracost comment github --path plan.json  --repo $GITHUB_REPOSITORY --pull-request $PR_NUMBER --github-token $GITHUB_TOKEN --behavior new
-infracost comment github --path=plan.json \
-                         --repo=$GITHUB_REPOSITORY \
-                         --github-token=$GITUB_TOKEN \
-                         --pull-request=$PR_NUMBER \
-                        --behavior=new
+ infracost breakdown --path . --terraform-workspace $DEPLOYMENT_ENV --format json >infracost.json
+ infracost comment github --path plan.json  --repo $GITHUB_REPOSITORY --pull-request $PR_NUMBER --github-token $GITHUB_TOKEN --behavior new
 done
