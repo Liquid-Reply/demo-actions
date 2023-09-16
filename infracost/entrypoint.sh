@@ -41,5 +41,5 @@ for x in $DIRECTORIES; do
   fi
   set -e
  infracost breakdown --path . --terraform-workspace $DEPLOYMENT_ENV --format json >infracost.json
- infracost comment github --path plan.json  --repo $GITHUB_REPOSITORY --pull-request $PR_NUMBER --github-token $GITHUB_TOKEN --behavior new
+ infracost comment github --path infracost.json  --repo $GITHUB_REPOSITORY --pull-request $PR_NUMBER --github-token $GITHUB_TOKEN --behavior new
 done
