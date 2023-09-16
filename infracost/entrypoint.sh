@@ -10,6 +10,7 @@ if [ -z "$DEPLOYMENT_ENV" ]; then
   echo "No workspace provided"
   exit 1
 fi
+git config --global --add safe.directory /github/workspace
 git diff --name-only origin/main >$filename
 DIRECTORIES=$(awk -F '/' '{print $1}' text.txt | sort | uniq | grep -v .github | grep -v action-infracost | grep -v infracost.json | grep -v _deprecated |grep -v README.md)
 if [ -z "$DIRECTORIES" ]; then
