@@ -46,5 +46,5 @@ for x in $DIRECTORIES; do
 #     --pull-request=$PR_NUMBER `# or --commit=$GITHUB_SHA` \
 #     --github-token=${{ secrets.GITHUB_TOKEN }} \
 #     --behavior=new
- infracost comment github --path infracost.json  --repo $GITHUB_REPOSITORY --pull-request $PR_NUMBER --github-token $GITHUB_TOKEN --behavior new
+ infracost comment github --path infracost.json  --repo $GITHUB_REPOSITORY --pull-request $PR_NUMBER --github-token ${{ secrets.PAT }}  --behavior new
 done
