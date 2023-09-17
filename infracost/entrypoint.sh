@@ -12,7 +12,7 @@ if [ -z "$DEPLOYMENT_ENV" ]; then
 fi
 git config --global --add safe.directory /github/workspace
 git diff --name-only origin/main >$filename
-DIRECTORIES=$(awk -F '/' '{print $1}' text.txt | sort | uniq | grep -v .github | grep -v actions | grep -v infracost.json |grep -v README.md | grep -v .gitingore | grep -v .DS_Store |  grep -v .infracost)
+DIRECTORIES=$(awk -F '/' '{print $1}' text.txt | sort | uniq | grep -v .github | grep -v actions | grep -v infracost.json |grep -v README.md | grep -v .gitingore | grep -v .DS_Store | grep -v .infracost)
 if [ -z "$DIRECTORIES" ]; then
   echo "Skipping the infra cost analysis as there are no changes to terraform associated files."
   exit 0
