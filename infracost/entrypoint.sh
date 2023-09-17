@@ -12,7 +12,7 @@ if [ -z "$DEPLOYMENT_ENV" ]; then
 fi
 git config --global --add safe.directory /github/workspace
 git diff --name-only origin/main >$filename
-DIRECTORIES=$(awk -F '/' '{print $1}' text.txt | sort | uniq | grep -v .github | grep -v action-infracost | grep -v infracost.json | grep -v _deprecated |grep -v README.md)
+DIRECTORIES=$(awk -F '/' '{print $1}' text.txt | sort | uniq | grep -v .github | grep -v actions | grep -v infracost.json |grep -v README.md | grep -v .gitingore)
 if [ -z "$DIRECTORIES" ]; then
   echo "Skipping the infra cost analysis as there are no changes to terraform associated files."
   exit 0
@@ -41,10 +41,5 @@ for x in $DIRECTORIES; do
   fi
   set -e
  infracost breakdown --path . --terraform-workspace $DEPLOYMENT_ENV --format json >infracost.json
-#  infracost comment github --path=infracost.json \
-#     --repo=$GITHUB_REPOSITORY \
-#     --pull-request=$PR_NUMBER `# or --commit=$GITHUB_SHA` \
-#     --github-token=${{ secrets.GITHUB_TOKEN }} \
-#     --behavior=new
  infracost comment github --path infracost.json  --repo $GITHUB_REPOSITORY --pull-request $PR_NUMBER --github-token $GITHUB_TOKEN --behavior new
 done
